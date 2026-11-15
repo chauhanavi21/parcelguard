@@ -151,6 +151,8 @@ class Store:
                 reserved = sum(o["quantity"] for o in orders if o["sku"] == item["sku"])
                 if item["initial_stock"] - item["stock"] != reserved: errors.append("Stock conservation failed")
             if effects > len(orders): errors.append("Duplicate business effects")
+            sent_without_effect = db.execute("SELECT COUNT(*) FROM outbox o WHERE o.state='sent' AND NOT EXISTS (SELECT 1 FROM effects e WHERE e.event_id=o.id)").fetchone()[0]
+            if sent_without_effect: errors.append("Event acknowledged without a business effect")
             return {"model_version": VERSION, "inventory": inventory, "orders": orders, "outbox": outbox,
                     "delivery_log": [dict(r) for r in db.execute("SELECT * FROM delivery_log ORDER BY seq DESC LIMIT 100")],
                     "summary": {"orders": len(orders), "pending": sum(r["state"] in {"pending", "leased"} for r in outbox),

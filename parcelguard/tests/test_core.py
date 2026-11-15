@@ -123,4 +123,14 @@ class OrderTests(unittest.TestCase):
             with self.assertRaises(ValueError): retry_experiment(**args)
 
 
+    def test_snapshot_flags_acknowledged_event_without_effect(self):
+        self.store.order("k1", "trail-pack", 1)
+        self.store.dispatch()
+        self.assertTrue(self.store.snapshot()["verification"]["valid"])
+        with self.store.db(True) as db: db.execute("DELETE FROM effects")
+        report = self.store.snapshot()["verification"]
+        self.assertFalse(report["valid"])
+        self.assertIn("Event acknowledged without a business effect", report["errors"])
+
+
 if __name__ == "__main__": unittest.main()
