@@ -36,8 +36,8 @@ def generate():
             study["scenarios"].append({"name":name, **retry_experiment(seed,clients,capacity)})
     root = Path(__file__).resolve().parent / "artifacts"
     root.mkdir(exist_ok=True)
-    (root / "order-evidence.json").write_text(json.dumps(evidence,indent=2),encoding="utf-8")
-    (root / "retry-study.json").write_text(json.dumps(study,indent=2),encoding="utf-8")
+    (root / "order-evidence.json").write_text(json.dumps(evidence,indent=2),encoding="utf-8", newline="\n")
+    (root / "retry-study.json").write_text(json.dumps(study,indent=2),encoding="utf-8", newline="\n")
     return {"checks":checks, "default_experiment":retry_experiment()}
 
 

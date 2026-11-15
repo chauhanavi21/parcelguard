@@ -61,7 +61,7 @@ def main():
                   "effects": state["summary"]["effects"], "claims": state["summary"]["attempts"],
                   "reserved_pence": expected, "pending": 0,
                   "scope": "Each historical invoice line becomes an order, not a complete invoice. GBP pence are preserved. Inventory is a constructed sufficient-stock fixture. Duplicate requests and 20 lost acknowledgements are injected, not observed in the source. No production retry-performance inference."}
-    (ROOT / "artifacts/real-data-checks.json").write_text(json.dumps(result, indent=2)+"\n", encoding="utf-8")
+    (ROOT / "artifacts/real-data-checks.json").write_text(json.dumps(result, indent=2)+"\n", encoding="utf-8", newline="\n")
     print(json.dumps(result))
 
 
