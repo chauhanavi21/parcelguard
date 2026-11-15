@@ -44,7 +44,7 @@
     ],
     "orders": [
       {
-        "id": "97b57950fbbc45c495e9d65f887eac35",
+        "id": "a4b4f8e7f709437eb7ef04120ee5ab79",
         "sku": "trail-pack",
         "quantity": 2,
         "total_cents": 15800,
@@ -54,11 +54,11 @@
     ],
     "outbox": [
       {
-        "id": "7d7ff64d9728477a90eb574119c7a1a6",
-        "order_id": "97b57950fbbc45c495e9d65f887eac35",
+        "id": "73c5b166937b4fd69dcb5f84b98ef2fd",
+        "order_id": "a4b4f8e7f709437eb7ef04120ee5ab79",
         "state": "sent",
         "attempts": 2,
-        "available_ms": 616,
+        "available_ms": 613,
         "lease_until_ms": 90000,
         "last_error": ""
       }
@@ -66,14 +66,14 @@
     "delivery_log": [
       {
         "seq": 2,
-        "event_id": "7d7ff64d9728477a90eb574119c7a1a6",
+        "event_id": "73c5b166937b4fd69dcb5f84b98ef2fd",
         "attempt": 2,
         "result": "duplicate delivery suppressed",
         "clock_ms": 60000
       },
       {
         "seq": 1,
-        "event_id": "7d7ff64d9728477a90eb574119c7a1a6",
+        "event_id": "73c5b166937b4fd69dcb5f84b98ef2fd",
         "attempt": 1,
         "result": "ack lost after consumer commit",
         "clock_ms": 0

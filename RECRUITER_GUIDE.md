@@ -8,7 +8,7 @@ ParcelGuard demonstrates safe retries around ambiguous completion: the first ope
 
 ## Draft résumé bullets
 
-- Built a Python/SQLite order reliability lab with client-scoped idempotency keys, intent-conflict detection, a transactional outbox, leased claims, bounded retries, and consumer deduplication; verified 22 core/HTTP tests and 33 browser checks.
+- Built a Python/SQLite order reliability lab with client-scoped idempotency keys, intent-conflict detection, a transactional outbox, leased claims, bounded retries, and consumer deduplication; verified 25 core/HTTP tests and 33 browser checks.
 - Designed paired, seeded retry experiments across two synthetic workloads; measured completion, retry amplification, and conditional latency, showing why low successful-client latency can hide a high failure rate.
 
 ## Evidence to show

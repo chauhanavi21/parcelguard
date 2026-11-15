@@ -28,6 +28,6 @@ The model therefore supports a workload-specific conclusion about contention and
 
 ## Verification
 
-22 core/HTTP tests and 33 browser checks passed. The browser run creates, replays, conflicts, loses an ACK, advances time, recovers without a second effect, changes experiment inputs, exports results, and checks 1440/1024/390 px layouts. No uncaught JavaScript errors or HTTP 5xx responses occurred. These are local checks, not remotely executed CI or production tests.
+25 core/HTTP tests and 33 browser checks passed. The browser run creates, replays, conflicts, loses an ACK, advances time, recovers without a second effect, changes experiment inputs, exports results, and checks 1440/1024/390 px layouts. No uncaught JavaScript errors or HTTP 5xx responses occurred. These are local checks, not remotely executed CI or production tests.
 
 For an interview, distinguish a request token from an event token, show the database transaction boundaries, then explain why successful-client latency alone can reward a strategy that abandons most users. Also distinguish the worker's eight-claim limit from the experiment's six-attempt client budget.

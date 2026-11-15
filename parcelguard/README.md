@@ -54,7 +54,7 @@ The redesigned workspace includes light/dark themes, animated data views, scroll
 python verify.py
 ```
 
-This runs **22 core/HTTP tests** and regenerates [order-evidence.json](artifacts/order-evidence.json), [retry-study.json](artifacts/retry-study.json), and [verification.json](artifacts/verification.json). Coverage includes concurrent duplicate requests/workers, restart persistence, atomic rollback, changed-intent conflicts, lost ACK recovery, expired leases, exhausted attempt budgets, malformed HTTP requests, and simulation reproducibility.
+This runs **25 core/HTTP tests** and regenerates [order-evidence.json](artifacts/order-evidence.json), [retry-study.json](artifacts/retry-study.json), and [verification.json](artifacts/verification.json). Coverage includes concurrent duplicate requests/workers, restart persistence, atomic rollback, changed-intent conflicts, lost ACK recovery, expired leases, exhausted attempt budgets, malformed HTTP requests, and simulation reproducibility.
 
 Optional browser verification:
 
