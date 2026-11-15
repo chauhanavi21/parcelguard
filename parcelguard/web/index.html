@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en" data-project="parcelguard" data-appearance="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0b1018" />
+    <meta
+      name="description"
+      content="ParcelGuard, an interactive idempotency and retry failure lab inspired by the AWS Builders Library."
+    />
+    <title>ParcelGuard · Delivery reliability lab</title>
+    <link rel="stylesheet" href="/style.css" />
+    <script src="/studio.js" defer></script>
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/"
+        ><span class="mark">P</span> ParcelGuard
+        <span class="brand-detail">/ Delivery reliability lab</span></a
+      ><span class="badge"><i></i> Local research lab</span>
+    </header>
+    <div class="layout">
+      <aside>
+        <div class="nav-label">WORKSPACE</div>
+        <nav>
+          <a class="active" href="#overview">Overview <span>01</span></a
+          ><a href="#operations">Failure controls <span>02</span></a
+          ><a href="#outbox">Outbox & orders <span>03</span></a
+          ><a href="#experiment">Retry experiment <span>04</span></a
+          ><a href="#method">Research & method <span>05</span></a>
+        </nav>
+        <div class="aside-note">
+          <span class="eyebrow">THE QUESTION</span>
+          <p>What if it worked, but the reply disappeared?</p>
+          <small>Reserve once. Deliver again. Inspect every effect.</small>
+        </div>
+        <div class="aside-footer">
+          INDEPENDENT PORTFOLIO PROJECT<br />Inspired by the AWS Builders’
+          Library.
+        </div>
+      </aside>
+      <main id="overview" tabindex="-1">
+        <div class="page-heading hero">
+          <div class="hero-copy">
+            <div class="eyebrow hero-overline">
+              BUILT FOR THE SECOND ATTEMPT
+            </div>
+            <h1>
+              One order.<br /><span class="headline-accent">Every retry.</span>
+            </h1>
+            <p class="subtitle">
+              Confidence when the reply disappears. Reserve an order, test the
+              failure, and watch the pipeline recover.
+            </p>
+            <div class="hero-actions">
+              <button id="export" disabled>
+                Export evidence <span aria-hidden="true">↗</span></button
+              ><a class="understated" href="#operations"
+                >Enter the failure lab
+                <span class="arrow-glyph" aria-hidden="true">↓</span></a
+              >
+            </div>
+          </div>
+          <div
+            id="hero-visual"
+            class="hero-frame"
+            role="region"
+            aria-label="Order pipeline overview"
+          >
+            <div class="frame-header">
+              <span>PREPARING WORKSPACE</span>
+              <div class="frame-dots" aria-hidden="true">
+                <i></i><i></i><i></i>
+              </div>
+            </div>
+            <div class="skeleton-row"></div>
+            <div class="skeleton-row"></div>
+            <div class="skeleton-row"></div>
+          </div>
+        </div>
+        <div class="notice" id="status" role="status" aria-live="polite">
+          Loading the local order pipeline…
+        </div>
+        <section
+          class="metrics"
+          id="metrics"
+          aria-label="Pipeline summary"
+        ></section>
+        <section class="clock-strip">
+          <div>
+            <span class="eyebrow">LAB CLOCK</span
+            ><strong id="clock">00:00</strong
+            ><small>Logical time advances only when requested.</small>
+          </div>
+          <button id="advance" class="secondary">Advance 60 seconds →</button>
+        </section>
+        <section class="two-col" id="operations">
+          <article class="panel">
+            <div class="eyebrow">01 / RESERVE</div>
+            <h2>Place an order</h2>
+            <p class="muted">
+              The same key and intent replay the original response. Changed
+              intent returns a conflict.
+            </p>
+            <form id="order-form" class="stack">
+              <label>Item<select id="sku"></select></label>
+              <div class="form-grid">
+                <label
+                  >Quantity<input
+                    id="quantity"
+                    type="number"
+                    min="1"
+                    max="1000"
+                    value="1"
+                    required /></label
+                ><label
+                  >Idempotency key<input
+                    id="key"
+                    maxlength="80"
+                    pattern="[A-Za-z0-9_-]+"
+                    required
+                /></label>
+              </div>
+              <div class="actions">
+                <button id="order">Reserve order →</button
+                ><button id="new-key" type="button" class="secondary">
+                  New key
+                </button>
+              </div>
+            </form>
+            <div id="order-result" class="result-box" aria-live="polite">
+              Create an order, then submit the same key again to test replay.
+            </div>
+          </article>
+          <article class="panel">
+            <div class="eyebrow">02 / DELIVER & RECOVER</div>
+            <h2>Break the acknowledgement</h2>
+            <p class="muted">
+              The consumer can commit an effect even when the worker never
+              receives its acknowledgement.
+            </p>
+            <form id="worker-form" class="stack">
+              <label
+                >Failure mode<select id="fault">
+                  <option value="none">Healthy delivery</option>
+                  <option value="before_delivery">Fail before consumer</option>
+                  <option value="after_delivery">
+                    Lose ACK after consumer commits
+                  </option>
+                </select></label
+              ><button id="dispatch">Deliver one due event →</button>
+            </form>
+            <div id="worker-result" class="result-box" aria-live="polite">
+              After a lost ACK, advance the clock, choose healthy delivery, and
+              retry. The effect stays singular.
+            </div>
+            <p class="caption">
+              30-second leases · capped full jitter · eight claims maximum ·
+              exhausted events remain visible as dead letters.
+            </p>
+          </article>
+        </section>
+        <section class="panel" id="outbox">
+          <div class="panel-heading">
+            <div>
+              <div class="eyebrow">DURABLE STATE</div>
+              <h2>Orders & transactional outbox</h2>
+            </div>
+            <span id="invariants" class="badge">Checking invariants</span>
+          </div>
+          <div
+            id="orders"
+            class="table-wrap"
+            tabindex="0"
+            role="region"
+            aria-label="Orders"
+          ></div>
+          <div class="panel-heading subheading">
+            <h3>Delivery log</h3>
+            <span class="muted">Latest 100 attempts</span>
+          </div>
+          <div
+            id="delivery-log"
+            class="table-wrap"
+            tabindex="0"
+            role="region"
+            aria-label="Delivery attempts"
+          ></div>
+        </section>
+        <section class="panel" id="experiment">
+          <div class="panel-heading">
+            <div>
+              <div class="eyebrow">03 / MEASURE</div>
+              <h2>What do synchronized retries cost?</h2>
+            </div>
+            <span class="badge">Synthetic contention model</span>
+          </div>
+          <form id="experiment-form" class="inline-form">
+            <label
+              >Clients<input
+                id="clients"
+                type="number"
+                min="10"
+                max="1000"
+                value="120"
+                required /></label
+            ><label
+              >Capacity / 100 ms<input
+                id="capacity"
+                type="number"
+                min="1"
+                max="100"
+                value="15"
+                required /></label
+            ><label
+              >Seed<input
+                id="seed"
+                type="number"
+                min="0"
+                max="4294967295"
+                value="42"
+                required /></label
+            ><button id="run-experiment">Compare retry strategies →</button>
+          </form>
+          <div id="experiment-chart" class="bar-chart"></div>
+          <div
+            id="experiment-table"
+            class="table-wrap"
+            tabindex="0"
+            role="region"
+            aria-label="Retry comparison"
+          ></div>
+          <p class="caption">
+            Each client gets at most six attempts. Service draws are paired
+            across strategies; jitter uses a separate random stream. Latency p95
+            includes successful clients only, so always read it alongside
+            completion. This is not a production benchmark.
+          </p>
+        </section>
+        <section class="panel" id="method">
+          <div class="eyebrow">RESEARCH → IMPLEMENTATION</div>
+          <h2>Durable intent. Repeatable recovery.</h2>
+          <div id="method-content"></div>
+        </section>
+        <footer>
+          ParcelGuard / v1.0 · Local effects only · Independent, not affiliated
+          with Amazon or AWS.
+        </footer>
+      </main>
+    </div>
+  </body>
+</html>

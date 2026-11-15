@@ -1,0 +1,156 @@
+{
+  "checked_at": "2026-11-15T05:49:42.537871+00:00",
+  "python": "3.11.9",
+  "command": "python verify.py",
+  "tests_run": 22,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "successful": true,
+  "evidence": {
+    "checks": {
+      "identical_replay": true,
+      "changed_intent_conflicts": true,
+      "injected_failure_rolled_back_exactly": true,
+      "consumer_committed_before_lost_ack": true,
+      "retry_deduplicated": true,
+      "one_order_one_effect": true,
+      "stock_conserved": true
+    },
+    "default_experiment": {
+      "seed": 42,
+      "clients": 120,
+      "capacity_per_100ms": 15,
+      "max_attempts": 6,
+      "model_version": "1.0.0",
+      "results": [
+        {
+          "strategy": "immediate",
+          "attempts": 650,
+          "completed": 14,
+          "clients": 120,
+          "amplification": 5.416666666666667,
+          "peak_attempts_per_slot": 650,
+          "completion_rate": 0.11666666666666667,
+          "p95_success_latency_ms": 25,
+          "timeline": [
+            {
+              "ms": 0,
+              "attempts": 650
+            }
+          ]
+        },
+        {
+          "strategy": "exponential",
+          "attempts": 506,
+          "completed": 87,
+          "clients": 120,
+          "amplification": 4.216666666666667,
+          "peak_attempts_per_slot": 120,
+          "completion_rate": 0.725,
+          "p95_success_latency_ms": 6225,
+          "timeline": [
+            {
+              "ms": 0,
+              "attempts": 120
+            },
+            {
+              "ms": 200,
+              "attempts": 106
+            },
+            {
+              "ms": 600,
+              "attempts": 92
+            },
+            {
+              "ms": 1400,
+              "attempts": 77
+            },
+            {
+              "ms": 3000,
+              "attempts": 63
+            },
+            {
+              "ms": 6200,
+              "attempts": 48
+            }
+          ]
+        },
+        {
+          "strategy": "full_jitter",
+          "attempts": 372,
+          "completed": 120,
+          "clients": 120,
+          "amplification": 3.1,
+          "peak_attempts_per_slot": 174,
+          "completion_rate": 1.0,
+          "p95_success_latency_ms": 1118,
+          "timeline": [
+            {
+              "ms": 0,
+              "attempts": 174
+            },
+            {
+              "ms": 100,
+              "attempts": 64
+            },
+            {
+              "ms": 200,
+              "attempts": 28
+            },
+            {
+              "ms": 300,
+              "attempts": 34
+            },
+            {
+              "ms": 400,
+              "attempts": 22
+            },
+            {
+              "ms": 500,
+              "attempts": 13
+            },
+            {
+              "ms": 600,
+              "attempts": 5
+            },
+            {
+              "ms": 700,
+              "attempts": 9
+            },
+            {
+              "ms": 800,
+              "attempts": 5
+            },
+            {
+              "ms": 900,
+              "attempts": 8
+            },
+            {
+              "ms": 1000,
+              "attempts": 4
+            },
+            {
+              "ms": 1100,
+              "attempts": 3
+            },
+            {
+              "ms": 1300,
+              "attempts": 1
+            },
+            {
+              "ms": 2000,
+              "attempts": 1
+            },
+            {
+              "ms": 2400,
+              "attempts": 1
+            }
+          ]
+        }
+      ],
+      "note": "Synthetic synchronized contention model. p95 is conditional on successful clients; failed clients are reported separately. Jitter results are workload-dependent, not a universal guarantee."
+    }
+  },
+  "real_data_passed": true
+}

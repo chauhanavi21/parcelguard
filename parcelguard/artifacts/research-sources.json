@@ -1,0 +1,22 @@
+[
+  {
+    "title": "AWS: Making retries safe with idempotent APIs",
+    "url": "https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/",
+    "page_title": "references-details-empty",
+    "resolved_url": "https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/",
+    "http_status": 200,
+    "bytes": 453282,
+    "content_sha256": "1d8aa5ab3fbc584521c8304f6dd6af552429f3824187b22665a847f09f6e0ad8",
+    "retrieved_at": "2026-11-15T04:03:20.434363+00:00"
+  },
+  {
+    "title": "AWS: Timeouts, retries, and backoff with jitter",
+    "url": "https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/",
+    "page_title": "Timeouts, retries, and backoff with jitter | AWS Builder Center",
+    "resolved_url": "https://builder.aws.com/content/3EumjoZascWd1oZiEgL8ORlv3qE/timeouts-retries-and-backoff-with-jitter",
+    "http_status": 200,
+    "bytes": 139337,
+    "content_sha256": "7e8b6d3c0336cc11b81431d7af6a4b240fd678b3abcaafa2f22b78289097deee",
+    "retrieved_at": "2026-11-15T04:03:20.491009+00:00"
+  }
+]

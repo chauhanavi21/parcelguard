@@ -1,0 +1,117 @@
+{
+  "checks": {
+    "identical_replay": true,
+    "changed_intent_conflicts": true,
+    "injected_failure_rolled_back_exactly": true,
+    "consumer_committed_before_lost_ack": true,
+    "retry_deduplicated": true,
+    "one_order_one_effect": true,
+    "stock_conserved": true
+  },
+  "after_lost_ack": {
+    "orders": 1,
+    "pending": 1,
+    "dead_letter": 0,
+    "effects": 1,
+    "replays": 1,
+    "attempts": 1,
+    "reserved_cents": 15800
+  },
+  "final": {
+    "model_version": "1.0.0",
+    "inventory": [
+      {
+        "sku": "camp-light",
+        "name": "Camp lantern",
+        "price_cents": 4600,
+        "initial_stock": 160,
+        "stock": 160
+      },
+      {
+        "sku": "field-bottle",
+        "name": "Field bottle",
+        "price_cents": 2800,
+        "initial_stock": 240,
+        "stock": 240
+      },
+      {
+        "sku": "trail-pack",
+        "name": "Trail daypack",
+        "price_cents": 7900,
+        "initial_stock": 120,
+        "stock": 118
+      }
+    ],
+    "orders": [
+      {
+        "id": "97b57950fbbc45c495e9d65f887eac35",
+        "sku": "trail-pack",
+        "quantity": 2,
+        "total_cents": 15800,
+        "stage": "ready_to_pack",
+        "created_ms": 0
+      }
+    ],
+    "outbox": [
+      {
+        "id": "7d7ff64d9728477a90eb574119c7a1a6",
+        "order_id": "97b57950fbbc45c495e9d65f887eac35",
+        "state": "sent",
+        "attempts": 2,
+        "available_ms": 616,
+        "lease_until_ms": 90000,
+        "last_error": ""
+      }
+    ],
+    "delivery_log": [
+      {
+        "seq": 2,
+        "event_id": "7d7ff64d9728477a90eb574119c7a1a6",
+        "attempt": 2,
+        "result": "duplicate delivery suppressed",
+        "clock_ms": 60000
+      },
+      {
+        "seq": 1,
+        "event_id": "7d7ff64d9728477a90eb574119c7a1a6",
+        "attempt": 1,
+        "result": "ack lost after consumer commit",
+        "clock_ms": 0
+      }
+    ],
+    "summary": {
+      "orders": 1,
+      "pending": 0,
+      "dead_letter": 0,
+      "effects": 1,
+      "replays": 1,
+      "attempts": 2,
+      "reserved_cents": 15800
+    },
+    "clock_ms": 60000,
+    "verification": {
+      "valid": true,
+      "errors": []
+    },
+    "sources": [
+      {
+        "title": "AWS: Making retries safe with idempotent APIs",
+        "url": "https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/"
+      },
+      {
+        "title": "AWS: Timeouts, retries, and backoff with jitter",
+        "url": "https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/"
+      }
+    ],
+    "notes": [
+      "SQLite atomically commits inventory reservation, order, idempotency response, and outbox event.",
+      "A client key replays its original response; the same key with different parameters returns conflict. Keys have no expiry in this prototype.",
+      "Outbox claims have a 30-second logical lease; abandoned claims can be reclaimed after clock advancement.",
+      "Each event has at most eight claims. Exhausted events remain in a dead-letter state for inspection; no automatic redrive is implemented.",
+      "Delivery is at least once. A unique event key and a local consumer transaction prevent duplicate local fulfillment effects. This is not an end-to-end exactly-once guarantee.",
+      "The consumer is a separate SQLite transaction in the same local database, not an external carrier or payment system.",
+      "Logical time and fault controls are explicit lab inputs. No orders, payments, notifications, or cloud requests leave this machine."
+    ]
+  },
+  "limits": "Single local client scope; consumer and outbox use separate transactions in one SQLite database. Random order/event IDs vary. No external delivery."
+}

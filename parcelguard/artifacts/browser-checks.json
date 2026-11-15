@@ -1,0 +1,150 @@
+{
+  "checked_at": "2026-11-15T05:51:47.950754+00:00",
+  "project": "parcelguard",
+  "browser": "chromium",
+  "browser_version": "159.0.8154.6",
+  "checks": [
+    {
+      "name": "retry comparison loads real model output",
+      "passed": true
+    },
+    {
+      "name": "new order reserves inventory",
+      "passed": true
+    },
+    {
+      "name": "replay reserves only once",
+      "passed": true
+    },
+    {
+      "name": "changed intent shows conflict",
+      "passed": true
+    },
+    {
+      "name": "lost acknowledgement leaves one effect and retry pending",
+      "passed": true
+    },
+    {
+      "name": "redelivery suppresses duplicate business effect",
+      "passed": true
+    },
+    {
+      "name": "delivery history exposes both attempts",
+      "passed": true
+    },
+    {
+      "name": "experiment controls update results",
+      "passed": true
+    },
+    {
+      "name": "evidence download contains actual pipeline and experiment",
+      "passed": true
+    },
+    {
+      "name": "stock and event invariants reconcile",
+      "passed": true
+    },
+    {
+      "name": "pipeline visualization matches committed state",
+      "passed": true
+    },
+    {
+      "name": "workspace motion layer loads",
+      "passed": true
+    },
+    {
+      "name": "keyboard navigation filters sections",
+      "passed": true
+    },
+    {
+      "name": "scroll navigation tracks the visible section",
+      "passed": true
+    },
+    {
+      "name": "scroll progress follows page position",
+      "passed": true
+    },
+    {
+      "name": "back-to-top returns to the workspace heading",
+      "passed": true
+    },
+    {
+      "name": "Escape dismisses keyboard navigation",
+      "passed": true
+    },
+    {
+      "name": "color theme changes",
+      "passed": true
+    },
+    {
+      "name": "theme preference survives reload",
+      "passed": true
+    },
+    {
+      "name": "motion can be paused",
+      "passed": true
+    },
+    {
+      "name": "motion preference survives reload",
+      "passed": true
+    },
+    {
+      "name": "system reduced motion suppresses animations",
+      "passed": true
+    },
+    {
+      "name": "normal motion returns when system preference clears",
+      "passed": true
+    },
+    {
+      "name": "desktop: no page overflow",
+      "passed": true
+    },
+    {
+      "name": "desktop: metric values fit their cards",
+      "passed": true
+    },
+    {
+      "name": "tablet: no page overflow",
+      "passed": true
+    },
+    {
+      "name": "tablet: metric values fit their cards",
+      "passed": true
+    },
+    {
+      "name": "tablet: section navigation stays available",
+      "passed": true
+    },
+    {
+      "name": "mobile: no page overflow",
+      "passed": true
+    },
+    {
+      "name": "mobile: metric values fit their cards",
+      "passed": true
+    },
+    {
+      "name": "mobile: section navigation stays available",
+      "passed": true
+    },
+    {
+      "name": "no uncaught JavaScript errors",
+      "passed": true
+    },
+    {
+      "name": "no HTTP 5xx responses",
+      "passed": true
+    }
+  ],
+  "passed": 33,
+  "page_errors": [],
+  "http_5xx": [],
+  "frame_cadence": {
+    "samples": 35,
+    "median_ms": 16.699999999999932,
+    "p95_ms": 16.700000000000045,
+    "note": "Local headless requestAnimationFrame cadence; not a production rendering benchmark."
+  },
+  "note": "Headless browser engine, isolated temporary server/database. WebKit on this host is not Safari. Includes domain workflows, keyboard navigation, theme/motion persistence, reduced motion, downloads, and three viewport widths."
+}

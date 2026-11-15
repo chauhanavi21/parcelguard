@@ -1,0 +1,19 @@
+{
+  "recorded_at": "2026-11-15T05:48:19.274519+00:00",
+  "file": "docs/demo.webm",
+  "bytes": 3492740,
+  "sha256": "a1cfb389b739ec430f19e74094a341f0f2e5b719f555fb1b1d0d5aaa2969796e",
+  "viewport": "1280x800",
+  "format": "WebM",
+  "audio": "Silent, with on-screen captions",
+  "chapters": [
+    "ParcelGuard \u00b7 Reserve once. Recover safely from a lost acknowledgement.",
+    "1 / A new request commits inventory, order, cached response and outbox together.",
+    "2 / Repeating the same intent replays its response. Stock is reserved once.",
+    "3 / The consumer commits, then the acknowledgement is lost. One effect; work remains pending.",
+    "4 / Redelivery is acknowledged. The unique consumer event key suppresses a second local effect.",
+    "5 / Compare completion and attempts together. Latency includes successful clients only.",
+    "Independent local prototype \u00b7 Synthetic retry model \u00b7 Full source, tests and limitations in the repository."
+  ],
+  "scope": "Uncut automated capture of the local Python app with an isolated temporary database."
+}

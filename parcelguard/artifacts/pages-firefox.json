@@ -1,0 +1,78 @@
+{
+  "project": "parcelguard",
+  "browser": "firefox",
+  "target": "local subdirectory Pages build",
+  "checks": [
+    {
+      "name": "retry comparison loads real model output",
+      "passed": true
+    },
+    {
+      "name": "new order reserves inventory",
+      "passed": true
+    },
+    {
+      "name": "replay reserves only once",
+      "passed": true
+    },
+    {
+      "name": "changed intent shows conflict",
+      "passed": true
+    },
+    {
+      "name": "lost acknowledgement leaves one effect and retry pending",
+      "passed": true
+    },
+    {
+      "name": "redelivery suppresses duplicate business effect",
+      "passed": true
+    },
+    {
+      "name": "delivery history exposes both attempts",
+      "passed": true
+    },
+    {
+      "name": "experiment controls update results",
+      "passed": true
+    },
+    {
+      "name": "evidence download contains actual pipeline and experiment",
+      "passed": true
+    },
+    {
+      "name": "stock and event invariants reconcile",
+      "passed": true
+    },
+    {
+      "name": "pipeline visualization matches committed state",
+      "passed": true
+    },
+    {
+      "name": "Pages mobile layout has no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "Pages mobile metric values fit",
+      "passed": true
+    },
+    {
+      "name": "Pages keyboard palette opens and closes",
+      "passed": true
+    },
+    {
+      "name": "a second tab has a separate empty database",
+      "passed": true
+    },
+    {
+      "name": "reload clears the temporary order database",
+      "passed": true
+    },
+    {
+      "name": "no uncaught JavaScript errors",
+      "passed": true
+    }
+  ],
+  "passed": 17,
+  "page_errors": [],
+  "scope": "Actual in-browser Python execution. No server-side HTTP/session/concurrency guarantee is inferred."
+}

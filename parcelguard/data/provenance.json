@@ -1,0 +1,16 @@
+{
+  "dataset": "Online Retail",
+  "author": "Daqing Chen",
+  "doi": "10.24432/C5BW33",
+  "source_url": "https://archive.ics.uci.edu/dataset/352/online+retail",
+  "download_url": "https://archive.ics.uci.edu/static/public/352/online+retail.zip",
+  "license": "CC BY 4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "retrieved_at": "2026-11-15T05:45:50.189680+00:00",
+  "download_sha256": "f5385cbb54bbebf7196389109c6b0621faab0c304e3702548165e71c84aede8b",
+  "fixture_sha256": "f9e5819d28a1ba77a0ce7b1387f3562e2be0644f718ac841a00701a6aff86b2b",
+  "selection": "First 200 worksheet rows with non-cancelled invoice, positive quantity <=1000 and price rounded to positive integer pence. Customer ID, country, description and timestamps excluded. Prices are GBP; Decimal rounding to nearest penny removes XLSX floating-point representation noise.",
+  "rows": 200,
+  "date_range": "2010-12-01; beginning of the 2010-2011 dataset",
+  "limitation": "Small ordered sample, not statistically representative. Replay and lost-ACK failures are injected; the dataset does not contain retry or incident ground truth."
+}

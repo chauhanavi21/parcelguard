@@ -1,0 +1,15 @@
+{
+  "checked_at": "2026-11-15T05:50:01.274065+00:00",
+  "dataset": "Online Retail",
+  "fixture_sha256": "f9e5819d28a1ba77a0ce7b1387f3562e2be0644f718ac841a00701a6aff86b2b",
+  "passed": true,
+  "line_orders": 200,
+  "distinct_product_price_variants": 162,
+  "replays": 200,
+  "changed_intent_conflicts": 10,
+  "effects": 200,
+  "claims": 220,
+  "reserved_pence": 890390,
+  "pending": 0,
+  "scope": "Each historical invoice line becomes an order, not a complete invoice. GBP pence are preserved. Inventory is a constructed sufficient-stock fixture. Duplicate requests and 20 lost acknowledgements are injected, not observed in the source. No production retry-performance inference."
+}

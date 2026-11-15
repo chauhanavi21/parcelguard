@@ -1,0 +1,50 @@
+import re
+from playwright.sync_api import expect
+import json
+from browser_support import run
+
+
+def scenario(page, context, base, output, check):
+    expect(page.locator('#status')).to_contain_text('Pipeline ready')
+    check("retry comparison loads real model output", page.locator("#experiment-table tbody tr").count()==3)
+    page.fill("#key", "browser-order")
+    page.fill("#quantity", "2")
+    page.click("#order")
+    expect(page.locator('#order-result')).to_contain_text('CREATED')
+    check("new order reserves inventory", context.request.get(base+"/api/workspace").json()["summary"]["orders"]==1)
+    page.click("#order")
+    expect(page.locator('#order-result')).to_contain_text('REPLAY')
+    state = context.request.get(base+"/api/workspace").json()
+    check("replay reserves only once", state["summary"]["orders"]==1 and state["summary"]["replays"]==1 and next(i for i in state["inventory"] if i["sku"]=="trail-pack")["stock"]==118)
+    page.fill("#quantity", "3")
+    page.click("#order")
+    expect(page.locator('#status')).to_have_class(re.compile('error'))
+    check("changed intent shows conflict", "different order parameters" in page.locator("#status").inner_text())
+    page.select_option("#fault", "after_delivery")
+    page.click("#dispatch")
+    expect(page.locator('#worker-result')).to_contain_text('ack lost')
+    state = context.request.get(base+"/api/workspace").json()
+    check("lost acknowledgement leaves one effect and retry pending", state["summary"]["effects"]==1 and state["summary"]["pending"]==1)
+    page.click("#advance")
+    expect(page.locator('#clock')).to_have_text('01:00')
+    page.select_option("#fault", "none")
+    page.click("#dispatch")
+    expect(page.locator('#worker-result')).to_contain_text('duplicate delivery suppressed')
+    expect(page.locator('#dispatch')).to_be_enabled()
+    state = context.request.get(base+"/api/workspace").json()
+    check("redelivery suppresses duplicate business effect", state["summary"]["effects"]==1 and state["summary"]["pending"]==0 and state["summary"]["attempts"]==2)
+    check("delivery history exposes both attempts", page.locator("#delivery-log tbody tr").count()==2)
+    page.fill("#clients", "80")
+    page.fill("#capacity", "10")
+    page.fill("#seed", "7")
+    page.click("#run-experiment")
+    expect(page.locator('#status')).to_contain_text('seed 7')
+    check("experiment controls update results", "80" in page.locator("#experiment-table").inner_text())
+    with page.expect_download() as event: page.click("#export")
+    report = json.loads(event.value.path().read_text(encoding="utf-8"))
+    check("evidence download contains actual pipeline and experiment", report["workspace"]["summary"]["effects"]==1 and report["experiment"]["seed"]==7)
+    check("stock and event invariants reconcile", report["workspace"]["verification"]["valid"])
+    check("pipeline visualization matches committed state", page.locator(".pipeline-values strong").all_inner_texts()==["1","1","1"])
+
+
+if __name__ == "__main__": run(scenario)
