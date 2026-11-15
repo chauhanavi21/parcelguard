@@ -42,3 +42,14 @@ class HTTPTests(BoundaryCase):
         status, _, result = self.request("POST", "/api/experiment", {"clients":30, "capacity":5, "seed":7})
         self.assertEqual(status, 200)
         self.assertTrue(all(row["attempts"]<=180 for row in result["results"]))
+
+    def test_unexpected_host_header_rejected(self):
+        self.assertEqual(self.request("GET", "/api/health", headers={"Host": "evil.example"})[0], 403)
+        self.assertEqual(self.request("GET", "/api/health", headers={"Host": "evil.example:%d" % self.server.server_port})[0], 403)
+        self.assertEqual(self.request("GET", "/api/health", headers={"Host": "localhost:%d" % self.server.server_port})[0], 200)
+        self.assertEqual(self.request("GET", "/api/health")[0], 200)
+
+    def test_empty_post_body_is_bad_request_not_too_large(self):
+        status, _, body = self.request("POST", "/api/health", raw="", headers={"Content-Type": "application/json"})
+        self.assertEqual(status, 400)
+        self.assertIn("{}", body["error"])
